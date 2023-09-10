@@ -36,28 +36,101 @@
       </section>
 
       <section class="max-sm:px-4 container mx-auto px-6">
-        <div id="websites-container" class="flex flex-wrap gap-12 py-8 ">
+        <div id="forms-container" class="w-full min-h-12 border-b-2 border-dashed">
+          <div id="botoes-mais-menos" class="w-full flex justify-start mt-5">
+            <button id="botaoMais"
+              class="mb-2 bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center">+</button>
+            <button id="botaoMenos"
+              class="mb-2 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center hidden">-</button>
+            <span class="ml-2">Adicionar novo item</span>
+          </div>
+          <div id="form-container" class="w-full border-solid border border-gray-300 rounded-md mb-3 hidden">
+            <div id="tabs" class="flex bg-gray-100 rounded-md">
+              <div class="w-40 p-1 border-4 bg-gray-300">
+                <div id="formTab"
+                  class="w-full p-1 px-3 text-center cursor-pointer rounded-md hover:bg-gray-400 bg-gray-100 underline underline-offset-4">
+                  Formulário</div>
+              </div>
+              <div class="w-40 p-1 border-4 bg-gray-300">
+                <div id="linkPreviewTab"
+                  class="w-full p-1 px-3 text-center cursor-pointer rounded-md hover:bg-gray-400 bg-gray-300">
+                  LinkPreview</div>
+              </div>
+            </div>
+            <div id="forms" class="p-4 md:p-8">
+              <div id="form-e-preview" class="w-full flex items-stretch gap-8 max-sm:flex-col">
+                <div class="max-sm:w-full w-1/2 flex justify-center">
+                  <!-- Formulário -->
+                  <form id="form" class="w-full bg-gray-100 p-4 rounded-lg">
+                    <div class="mb-4">
+                      <label for="titulo" class="block text-gray-700 font-bold">Título:</label>
+                      <input type="text" id="titulo" placeholder="Título" class="border rounded w-full py-2 px-3">
+                    </div>
+                    <div class="mb-4">
+                      <label for="imagem" class="block text-gray-700 font-bold">Link da Imagem:</label>
+                      <input type="text" id="imagem" placeholder="Link da Imagem"
+                        class="border rounded w-full py-2 px-3">
+                    </div>
+                    <div class="mb-4">
+                      <label for="descricao" class="block text-gray-700 font-bold">Descrição:</label>
+                      <input type="text" id="descricao" placeholder="Descrição"
+                        class="border rounded w-full py-2 px-3">
+                    </div>
+                    <div class="mb-4">
+                      <label for="url" class="block text-gray-700 font-bold">URL:</label>
+                      <input type="text" id="url" placeholder="URL" class="border rounded w-full py-2 px-3">
+                    </div>
+                  </form>
+                  <!-- LinkPreview (inicialmente oculto) -->
+                  <form id="linkPreviewForm" class="w-full bg-gray-100 p-4 rounded-lg hidden">
+                    <div class="mb-4">
+                      <label for="linkPreviewUrl" class="block text-gray-700 font-bold">URL:</label>
+                      <input type="text" id="linkPreviewUrl" placeholder="URL" required class="border rounded w-full py-2 px-3">
+                      <button id="btn-gerar-preview" class="mt-8 border border-solid bg-gray-200 p-3 rounded-lg w-full">Gerar Preview</button>
+                    </div>
+                  </form>
+                </div>
+                <div id="preview" class="max-sm:w-full w-1/2">
+                  <h3 class="p-2 w-full text-gray-700 font-bold text-center">Preview</h3>
+                  <div id="preview-body" class="hidden">
+                    <div class="flex justify-center gap-12">
+                      <button id="btn-confirmar" class="bg-none text-green-500">Confirmar</button>
+                      <button id="btn-cancelar" class="bg-none text-red-500">Cancelar</button>
+                    </div>
+                    <div id="form-preview" class="flex justify-center items-center">
+                      <!-- Espaço para preview do novo card a ser adicionado -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2 class="mt-12 text-4xl font-bold">Websites Favoritos!</h2>
+        <div id="websites-container" class="flex flex-wrap gap-12 py-8 justify-center">
+          
           <!-- <div class="w-80 max-w-md bg-white rounded-lg shadow-lg p-4">
             <img src="https://www.google.com/images/logo.png" class="w-full h-32 rounded-t-lg object-contain" alt="Imagem do site" />
             <div class="p-4 h-[calc(100%-105px)]">
-              <h2 class="text-2xl font-semibold mb-2">Google</h2>
+              <h3 class="text-2xl font-semibold mb-2">Google 2</h3>
               <div class="flex flex-col justify-between h-full">
                 <p class="text-gray-500 mb-5">Search webpages, images, videos and more.</p>
                 <a href="https://www.google.com" class="text-blue-500 hover:underline mt-2 block">Acessar</a>
               </div>
             </div>
           </div>
-          <div class="w-80 max-w-md bg-white rounded-lg shadow-lg p-4">
+          <div class="w-80 max-w-md bg-white rounded-lg shadow-lg p-4 relative">
             <img src="https://ada-site-frontend.s3.sa-east-1.amazonaws.com/home/Thumb-Ada.png"
               class="w-full h-32 rounded-t-lg object-contain" alt="Imagem do site" />
             <div class="p-4 h-[calc(100%-105px)]">
-              <h2 class="text-2xl font-semibold mb-2">Ada | A Nova Educação</h2>
+              <h3 class="text-2xl font-semibold mb-2">Ada | A Nova Educação</h3>
               <div>
                 <p class="text-gray-500 mb-5">Saber programar é mais importante que um diploma em seu currículo. Formações em
                   tecnologia com foco em empregabilidade.</p>
                 <a href="https://ada.tech:443/" class="text-blue-500 hover:underline mt-2 block">Acessar</a>
               </div>
             </div>
+            <img src="./assets/trash_icon.png" alt="icone da lixeira" class="w-8 absolute right-5 bottom-7">
           </div> -->
         </div>
       </section>
