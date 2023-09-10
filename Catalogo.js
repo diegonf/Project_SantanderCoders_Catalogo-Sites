@@ -1,52 +1,69 @@
+import { WebsiteForm, WebsiteLinkPreview } from "./Website.js";
+
 export class Catalogo {
-  #websites = [];
+  static #websites = [];
   constructor() { }
 
-  carregarCatalogoInicial() {
+  static async carregarCatalogoInicial () {
     const lista = JSON.parse(localStorage.getItem('listaSites'));
-    this.#websites = lista ? lista : [];
+    if(!lista) return;
+
+    this.#websites = await Promise.all(lista.map(async (item) => {
+      if(item.tipo === "link") {
+        const wsPreview = new WebsiteLinkPreview();
+        await wsPreview.fetchData(item.url);
+        return wsPreview;
+      }
+      else if(item.tipo === "form") return new WebsiteForm(item.titulo, item.imagem, item.descricao, item.url);
+    }));
+    console.log('#websites: ', this.#websites);
     this.#imprimirLista();
+    
   }
 
-  cadastrarCatalogoInicial_excluir() {
+  static cadastrarCatalogoInicial_excluir() {
     const lista = [
       {
-        "title": "Google",
-        "description": "Search webpages, images, videos and more.",
-        "image": "https://www.google.com/images/logo.png",
-        "url": "https://www.google.com"
+        titulo: "Google",
+        descricao: "Search webpages, images, videos and more.",
+        imagem: "https://www.google.com/images/logo.png",
+        url: "https://www.google.com",
+        tipo: "link"
       },
       {
-        "title": "Ada | A Nova Educação",
-        "description": "Saber programar é mais importante que um diploma em seu currículo. Formações em tecnologia com foco em empregabilidade.",
-        "image": "https://ada-site-frontend.s3.sa-east-1.amazonaws.com/home/Thumb-Ada.png",
-        "url": "https://ada.tech:443/"
+        titulo: "Ada | A Nova Educação",
+        descricao: "Saber programar é mais importante que um diploma em seu currículo. Formações em tecnologia com foco em empregabilidade.",
+        imagem: "https://ada-site-frontend.s3.sa-east-1.amazonaws.com/home/Thumb-Ada.png",
+        url: "https://ada.tech:443/",
+        tipo: "form"
       }
     ];
     localStorage.setItem('listaSites', JSON.stringify(lista));
   }
 
-  #imprimirLista() {
-    console.log(this.#websites);
+  static #imprimirLista() {
+    console.log('catalogo imprimitLista:', this.#websites);
     const divWebsites = document.querySelector('#websites-container');
     divWebsites.innerHTML = "";
 
     this.#websites.forEach(item => {
+      console.log(item.titulo);
+      console.log(item.imagem);
       const card = this.#criarCard(item);
       divWebsites.appendChild(card);
     });
   }
 
-  #criarCard(card) {
+  static #criarCard(card) {
     // div card
     const divCard = document.createElement('div');
     divCard.className = 'w-80 max-w-md bg-white rounded-lg shadow-lg p-4';
 
     // img
     const imagem = document.createElement('img');
-    imagem.src = card.image;
+    imagem.src = card.imagem;
     imagem.className = 'w-full h-32 rounded-t-lg object-contain';
-    imagem.alt = `Imagem do site ${card.title}`;
+    imagem.alt = `Imagem do site ${card.titulo}`;
     divCard.appendChild(imagem);
 
     // div do corpo do card
@@ -57,7 +74,7 @@ export class Catalogo {
     // h3 titulo
     const titulo = document.createElement('h3');
     titulo.className = 'text-2xl font-semibold mb-2';
-    titulo.textContent = card.title;
+    titulo.textContent = card.titulo;
     divCorpo.appendChild(titulo);
 
     // div texto e link do card
@@ -68,7 +85,7 @@ export class Catalogo {
     // p descrição
     const descricao = document.createElement('p');
     descricao.className = 'text-gray-500 mb-5';
-    descricao.textContent = card.description;
+    descricao.textContent = card.descricao;
     divTexto.appendChild(descricao);
 
     // a url
