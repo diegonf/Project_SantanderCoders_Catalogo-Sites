@@ -10,42 +10,56 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./reset.css">
   <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
   <div>
     <header class="bg-slate-100">
-      <div class="max-sm:flex-col max-sm:h-32 max-sm:justify-center max-sm:px-4 container mx-auto px-6 flex sm:justify-between items-center h-24">
+      <div
+        class="max-sm:flex-col max-sm:h-32 max-sm:justify-center max-sm:px-4 container mx-auto px-6 flex sm:justify-between items-center h-24">
         <div class="max-sm:w-full max-sm:mb-2 max-sm:justify-center flex items-center">
-          <img 
-            src="./assets/icone_IA.png" 
-            alt="icone do catalogo de IAs" 
-            class="h-14 max-sm:h-10 max-sm:mr-2"
-          />
+          <img src="./assets/icone_IA.png" alt="icone do catalogo de IAs" class="h-14 max-sm:h-10 max-sm:mr-2" />
           <h1 class="font-bold text-2xl">Apps IA</h1>
         </div>
         <form class="max-sm:w-full">
-          <input 
-            class="max-sm:w-full max-sm:text-center w-96 p-3 rounded-3xl "
-            placeholder="Pesquisar aplicações por nome." 
-            type="text"
-          />
+          <input class="max-sm:w-full max-sm:text-center w-96 p-3 rounded-3xl "
+            placeholder="Pesquisar aplicações por nome." type="text" />
         </form>
       </div>
     </header>
 
-    <main class="max-sm:min-h-[calc(100vh-192px)] min-h-[calc(100vh-160px)]">
+    <main class="max-sm:min-h-[calc(100vh-120px)] min-h-[calc(100vh-100px)]">
       <section>
-        <img 
-          src="./assets/banner.jpg" 
-          alt="banner sobre IA"
-          class="max-sm:h-48 h-80 w-full object-cover object-right"
-        >
+        <img src="./assets/banner.jpg" alt="banner sobre IA" class="max-sm:h-48 h-80 w-full object-cover object-right">
       </section>
 
       <section class="max-sm:px-4 container mx-auto px-6">
-
+        <div id="websites-container" class="flex flex-wrap gap-12 py-8 ">
+          <!-- <div class="w-80 max-w-md bg-white rounded-lg shadow-lg p-4">
+            <img src="https://www.google.com/images/logo.png" class="w-full h-32 rounded-t-lg object-contain" alt="Imagem do site" />
+            <div class="p-4 h-[calc(100%-105px)]">
+              <h2 class="text-2xl font-semibold mb-2">Google</h2>
+              <div class="flex flex-col justify-between h-full">
+                <p class="text-gray-500 mb-5">Search webpages, images, videos and more.</p>
+                <a href="https://www.google.com" class="text-blue-500 hover:underline mt-2 block">Acessar</a>
+              </div>
+            </div>
+          </div>
+          <div class="w-80 max-w-md bg-white rounded-lg shadow-lg p-4">
+            <img src="https://ada-site-frontend.s3.sa-east-1.amazonaws.com/home/Thumb-Ada.png"
+              class="w-full h-32 rounded-t-lg object-contain" alt="Imagem do site" />
+            <div class="p-4 h-[calc(100%-105px)]">
+              <h2 class="text-2xl font-semibold mb-2">Ada | A Nova Educação</h2>
+              <div>
+                <p class="text-gray-500 mb-5">Saber programar é mais importante que um diploma em seu currículo. Formações em
+                  tecnologia com foco em empregabilidade.</p>
+                <a href="https://ada.tech:443/" class="text-blue-500 hover:underline mt-2 block">Acessar</a>
+              </div>
+            </div>
+          </div> -->
+        </div>
       </section>
     </main>
 
