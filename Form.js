@@ -1,5 +1,5 @@
 import { Catalogo } from "./Catalogo.js";
-import { Website, WebsiteForm, WebsiteLinkPreview } from "./Website.js";
+import { WebsiteForm, WebsiteLinkPreview } from "./Website.js";
 
 export class Form {
   static formAtivo = 'formulario';

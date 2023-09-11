@@ -13,7 +13,7 @@ export class Website {
     this.#descricao = descricao;
     this.#url = url;
     this.#id = id;
-    this.#cardDOM = Website.criarCard({titulo, imagem, descricao, url, id, fonte: this.fonte()});
+    this.#cardDOM = Website.criarCard({ titulo, imagem, descricao, url, id, fonte: this.fonte() });
   }
 
   get titulo() { return this.#titulo; }
@@ -82,7 +82,7 @@ export class Website {
     divTexto.appendChild(span);
 
     // icone trash para deletar
-    if(!card.id) return divCard;
+    if (!card.id) return divCard;
     const trash = document.createElement('img');
     trash.src = './assets/trash_icon.png';
     trash.className = 'w-8 absolute right-5 bottom-8 cursor-pointer';
@@ -108,11 +108,11 @@ export class WebsiteLinkPreview extends Website {
       if (!response.ok) throw new Error('Não foi possível buscar os dados');
 
       const responseData = await response.json();
-      this.#inicializarDados({...responseData, id});
+      this.#inicializarDados({ ...responseData, id });
 
     } catch (error) {
       console.error('Erro:', error.message);
-      this.#inicializarDados({ title: 'Error Key', image: '', description: 'Error', url: '#', id });
+      this.#inicializarDados({ title: link, image: '', description: `Não foi possível obter os dados do link ${link}`, url: link, id });
     }
   }
 
@@ -122,7 +122,7 @@ export class WebsiteLinkPreview extends Website {
     this.descricao = data.description;
     this.url = data.url;
     this.id = data.id;
-    this.cardDOM = Website.criarCard({titulo: data.title, imagem: data.image, descricao: data.description, url: data.url, id: data.id, fonte: this.fonte()});
+    this.cardDOM = Website.criarCard({ titulo: data.title, imagem: data.image, descricao: data.description, url: data.url, id: data.id, fonte: this.fonte() });
   }
 
   fonte() {
