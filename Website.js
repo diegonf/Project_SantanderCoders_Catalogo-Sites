@@ -13,7 +13,7 @@ export class Website {
     this.#descricao = descricao;
     this.#url = url;
     this.#id = id;
-    if(titulo) this.#cardDOM = Website.criarCard({ titulo, imagem, descricao, url, id, fonte: this.fonte() });
+    if(titulo) this.#cardDOM = this.criarCard({ titulo, imagem, descricao, url, id, fonte: this.fonte() });
   }
 
   get titulo() { return this.#titulo; }
@@ -34,7 +34,7 @@ export class Website {
     throw new Error('Esse método deve ser chamado nas classes filhas');
   }
 
-  static criarCard(card) {
+  criarCard(card) {
     // div card
     const divCard = document.createElement('div');
     divCard.className = 'w-80 h-[31rem] max-w-md bg-white rounded-xl shadow-lg relative mb-20';
@@ -84,12 +84,20 @@ export class Website {
 
     // icone trash para deletar
     if (!card.id) return divCard;
+
     const trash = document.createElement('img');
     trash.src = './assets/trash.png';
     trash.className = 'w-8 absolute right-5 bottom-8 cursor-pointer';
     trash.alt = `icone da lixeira - deletar card`;
     trash.addEventListener('click', () => Catalogo.deletarItem(card.id));
     divCard.appendChild(trash);
+
+    const edit = document.createElement('img');
+    edit.src = './assets/edit.png';
+    edit.className = 'w-8 absolute right-16 bottom-8 cursor-pointer';
+    edit.alt = `icone ddo lapis - editar card`;
+    edit.addEventListener('click', () => this.editarItem(card.id));
+    divCard.appendChild(edit);
 
     return divCard;
   }
@@ -129,7 +137,7 @@ export class WebsiteLinkPreview extends Website {
     this.descricao = data.description;
     this.url = data.url;
     this.id = data.id;
-    this.cardDOM = Website.criarCard({ titulo: data.title, imagem: data.image, descricao: data.description, url: data.url, id: data.id, fonte: this.fonte() });
+    this.cardDOM = this.criarCard({ titulo: data.title, imagem: data.image, descricao: data.description, url: data.url, id: data.id, fonte: this.fonte() });
   }
 
   fonte() {
