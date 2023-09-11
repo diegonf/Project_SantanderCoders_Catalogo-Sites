@@ -13,7 +13,7 @@ export class Website {
     this.#descricao = descricao;
     this.#url = url;
     this.#id = id;
-    this.#cardDOM = Website.criarCard({ titulo, imagem, descricao, url, id, fonte: this.fonte() });
+    if(titulo) this.#cardDOM = Website.criarCard({ titulo, imagem, descricao, url, id, fonte: this.fonte() });
   }
 
   get titulo() { return this.#titulo; }
@@ -41,6 +41,7 @@ export class Website {
 
     // img
     const imagem = document.createElement('img');
+
     imagem.src = card.imagem;
     imagem.className = 'w-full h-40 rounded-t-lg object-contain';
     imagem.alt = `Imagem do site ${card.titulo}`;
@@ -84,7 +85,7 @@ export class Website {
     // icone trash para deletar
     if (!card.id) return divCard;
     const trash = document.createElement('img');
-    trash.src = './assets/trash_icon.png';
+    trash.src = './assets/trash.png';
     trash.className = 'w-8 absolute right-5 bottom-8 cursor-pointer';
     trash.alt = `icone da lixeira - deletar card`;
     trash.addEventListener('click', () => Catalogo.deletarItem(card.id));
@@ -103,8 +104,14 @@ export class WebsiteLinkPreview extends Website {
 
   async fetchData(link, id) {
     try {
-      const data = new URLSearchParams({ key: '5aca0012d6c92562f212833276229f2b', q: link });
-      const response = await fetch('https://api.linkpreview.net', { method: 'POST', body: data });
+      const url = 'https://api.linkpreview.net';
+      const data = { key: '5aca0012d6c92562f212833276229f2b', q: link };
+      const header = {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(data),
+      }
+      const response = await fetch(url, header);
       if (!response.ok) throw new Error('Não foi possível buscar os dados');
 
       const responseData = await response.json();
@@ -112,7 +119,7 @@ export class WebsiteLinkPreview extends Website {
 
     } catch (error) {
       console.error('Erro:', error.message);
-      this.#inicializarDados({ title: link, image: '', description: `Não foi possível obter os dados do link ${link}`, url: link, id });
+      this.#inicializarDados({ title: link, image: './assets/erro.avif', description: `Não foi possível obter os dados do link ${link}`, url: link, id });
     }
   }
 
