@@ -6,44 +6,32 @@ export class Website {
   #descricao;
   #url;
   #id;
+  #cardDOM;
   constructor(titulo, imagem, descricao, url, id) {
     this.#titulo = titulo;
     this.#imagem = imagem;
     this.#descricao = descricao;
     this.#url = url;
     this.#id = id;
+    this.#cardDOM = Website.criarCard({titulo, imagem, descricao, url, id, fonte: this.fonte()});
   }
 
-  get titulo() {
-    return this.#titulo;
-  }
-  get imagem() {
-    return this.#imagem;
-  }
-  get descricao() {
-    return this.#descricao;
-  }
-  get url() {
-    return this.#url;
-  }
-  get id() {
-    return this.#id;
-  }
+  get titulo() { return this.#titulo; }
+  get imagem() { return this.#imagem; }
+  get descricao() { return this.#descricao; }
+  get url() { return this.#url; }
+  get id() { return this.#id; }
+  get cardDOM() { return this.#cardDOM; }
 
-  set titulo(titulo) {
-    this.#titulo = titulo;
-  }
-  set imagem(imagem) {
-    this.#imagem = imagem;
-  }
-  set descricao(descricao) {
-    this.#descricao = descricao;
-  }
-  set url(url) {
-    this.#url = url;
-  }
-  set id(id) {
-    this.#id = id;
+  set titulo(titulo) { this.#titulo = titulo; }
+  set imagem(imagem) { this.#imagem = imagem; }
+  set descricao(descricao) { this.#descricao = descricao; }
+  set url(url) { this.#url = url; }
+  set id(id) { this.#id = id; }
+  set cardDOM(cardDOM) { this.#cardDOM = cardDOM; }
+
+  fonte() {
+    throw new Error('Esse método deve ser chamado nas classes filhas');
   }
 
   static criarCard(card) {
@@ -87,11 +75,17 @@ export class Website {
     link.textContent = 'Acessar';
     divTexto.appendChild(link);
 
+    // fonte
+    const span = document.createElement('span');
+    span.className = 'text-right -mb-4 text-xl';
+    span.textContent = card.fonte;
+    divTexto.appendChild(span);
+
     // icone trash para deletar
     if(!card.id) return divCard;
     const trash = document.createElement('img');
     trash.src = './assets/trash_icon.png';
-    trash.className = 'w-8 absolute right-5 bottom-4 cursor-pointer';
+    trash.className = 'w-8 absolute right-5 bottom-8 cursor-pointer';
     trash.alt = `icone da lixeira - deletar card`;
     trash.addEventListener('click', () => Catalogo.deletarItem(card.id));
     divCard.appendChild(trash);
@@ -101,8 +95,10 @@ export class Website {
 }
 
 export class WebsiteLinkPreview extends Website {
+  #tipo;
   constructor() {
     super();
+    this.#tipo = 'link-preview';
   }
 
   async fetchData(link, id) {
@@ -126,12 +122,31 @@ export class WebsiteLinkPreview extends Website {
     this.descricao = data.description;
     this.url = data.url;
     this.id = data.id;
+    this.cardDOM = Website.criarCard({titulo: data.title, imagem: data.image, descricao: data.description, url: data.url, id: data.id, fonte: this.fonte()});
+  }
+
+  fonte() {
+    return 'fonte: LinkPreview';
+  }
+
+  get tipo() {
+    return this.#tipo;
   }
 }
 
 export class WebsiteForm extends Website {
+  #tipo;
   constructor(titulo, linkImg, descricao, url, id) {
     super(titulo, linkImg, descricao, url, id);
+    this.#tipo = 'usuario';
+  }
+
+  fonte() {
+    return 'fonte: usuário';
+  }
+
+  get tipo() {
+    return this.#tipo;
   }
 }
 

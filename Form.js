@@ -1,5 +1,5 @@
 import { Catalogo } from "./Catalogo.js";
-import { Website, WebsiteLinkPreview } from "./Website.js";
+import { Website, WebsiteForm, WebsiteLinkPreview } from "./Website.js";
 
 export class Form {
   static formAtivo = 'formulario';
@@ -89,14 +89,14 @@ export class Form {
     Form.#imprimirPreviewForm({ titulo, imagem, descricao, url });
   }
 
-  static #imprimirPreviewForm(cardData) {
+  static #imprimirPreviewForm(data) {
     const previewDiv = document.querySelector('#form-preview');
     const previewBody = document.querySelector('#preview-body');
     previewDiv.innerHTML = "";
     previewBody.classList.remove('hidden');
 
-    const card = Website.criarCard(cardData);
-    previewDiv.appendChild(card);
+    const wsUsuario = new WebsiteForm(data.titulo, data.imagem, data.descricao, data.url)
+    previewDiv.appendChild(wsUsuario.cardDOM);
   }
 
   static async #imprimirPreviewLinkPreview() {
@@ -108,10 +108,9 @@ export class Form {
     const wsPreview = new WebsiteLinkPreview();
     await wsPreview.fetchData(link);
     previewDiv.innerHTML = "";
-    const card = Website.criarCard(wsPreview);
 
     previewBody.classList.remove('hidden');
-    previewDiv.appendChild(card);
+    previewDiv.appendChild(wsPreview.cardDOM);
   }
 
   static #submeterCadastro() {

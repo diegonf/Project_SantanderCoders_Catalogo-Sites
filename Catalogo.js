@@ -1,76 +1,24 @@
-import { Website, WebsiteForm, WebsiteLinkPreview } from "./Website.js";
+import { WebsiteForm, WebsiteLinkPreview } from "./Website.js";
 
 export class Catalogo {
   static #websites = [];
   static #id = 0;
   constructor() { }
 
-  static carregarCatalogoInicial() {
+  static async carregarCatalogoInicial() {
     const lista = JSON.parse(localStorage.getItem('listaSites'));
     if (!lista) return;
 
-    this.#websites = lista.map(item => new WebsiteForm(item.titulo, item.imagem, item.descricao, item.url, Catalogo.id));
+    this.#websites = await Promise.all(lista.map(async item => {
+      if(!item.tipo || item.tipo === 'usuario') {
+        return new WebsiteForm(item.titulo, item.imagem, item.descricao, item.url, Catalogo.id);
+      } else if (item.tipo ==='link-preview') {
+        const wsPreview = new WebsiteLinkPreview();
+        await wsPreview.fetchData(item.url, Catalogo.id);
+        return wsPreview;
+      }
+    })); 
     this.#imprimirLista();
-  }
-
-  static cadastrarCatalogoInicial_excluir() {
-    const lista = [
-      {
-        titulo: "Tailwind CSS - Rapidly build modern websites without ever leaving your HTML.",
-        descricao: "Tailwind CSS is a utility-first CSS framework for rapidly building modern websites without ever leaving your HTML.",
-        imagem: "https://tailwindcss.com/_next/static/media/social-card-large.a6e71726.jpg",
-        url: "https://tailwindcss.com/"
-      },
-      {
-        titulo: "Google",
-        descricao: "Search webpages, images, videos and more.",
-        imagem: "https://www.google.com/images/logo.png",
-        url: "https://www.google.com",
-      },
-      {
-        titulo: "Ada | A Nova Educação",
-        descricao: "Saber programar é mais importante que um diploma em seu currículo. Formações em tecnologia com foco em empregabilidade.",
-        imagem: "https://ada-site-frontend.s3.sa-east-1.amazonaws.com/home/Thumb-Ada.png",
-        url: "https://ada.tech:443/",
-      },
-      {
-        titulo: "Google",
-        descricao: "Search webpages, images, videos and more.",
-        imagem: "https://www.google.com/images/logo.png",
-        url: "https://www.google.com",
-      },
-      {
-        titulo: "Ada | A Nova Educação",
-        descricao: "Saber programar é mais importante que um diploma em seu currículo. Formações em tecnologia com foco em empregabilidade.",
-        imagem: "https://ada-site-frontend.s3.sa-east-1.amazonaws.com/home/Thumb-Ada.png",
-        url: "https://ada.tech:443/",
-      },
-      {
-        titulo: "Google",
-        descricao: "Search webpages, images, videos and more.",
-        imagem: "https://www.google.com/images/logo.png",
-        url: "https://www.google.com",
-      },
-      {
-        titulo: "Ada | A Nova Educação",
-        descricao: "Saber programar é mais importante que um diploma em seu currículo. Formações em tecnologia com foco em empregabilidade.",
-        imagem: "https://ada-site-frontend.s3.sa-east-1.amazonaws.com/home/Thumb-Ada.png",
-        url: "https://ada.tech:443/",
-      },
-      {
-        titulo: "Google",
-        descricao: "Search webpages, images, videos and more.",
-        imagem: "https://www.google.com/images/logo.png",
-        url: "https://www.google.com",
-      },
-      {
-        titulo: "Ada | A Nova Educação",
-        descricao: "Saber programar é mais importante que um diploma em seu currículo. Formações em tecnologia com foco em empregabilidade.",
-        imagem: "https://ada-site-frontend.s3.sa-east-1.amazonaws.com/home/Thumb-Ada.png",
-        url: "https://ada.tech:443/",
-      },
-    ];
-    localStorage.setItem('listaSites', JSON.stringify(lista));
   }
 
   static cadastrarNovoItemFormulario(item) {
@@ -98,11 +46,8 @@ export class Catalogo {
     divWebsites.innerHTML = "";
 
     this.#websites.forEach(item => {
-      const card = Website.criarCard(item);
-      divWebsites.appendChild(card);
+      divWebsites.appendChild(item.cardDOM);
     });
-
-    console.log(this.#websites);
   }
   
   static #atualizarLocalStorage() {
@@ -110,7 +55,8 @@ export class Catalogo {
       titulo: item.titulo,
       descricao: item.descricao,
       imagem: item.imagem,
-      url: item.url
+      url: item.url,
+      tipo: item.tipo
     }))
     localStorage.setItem('listaSites', JSON.stringify(lista));
   }

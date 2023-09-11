@@ -20,12 +20,12 @@
       <div
         class="max-sm:flex-col max-sm:h-32 max-sm:justify-center max-sm:px-4 container mx-auto px-6 flex sm:justify-between items-center h-24">
         <div class="max-sm:w-full max-sm:mb-2 max-sm:justify-center flex items-center">
-          <img src="./assets/icone_IA.png" alt="icone do catalogo de IAs" class="h-14 max-sm:h-10 max-sm:mr-2" />
-          <h1 class="font-bold text-2xl">Apps IA</h1>
+          <img src="./assets/icone_IA.png" alt="icone do catalogo de IAs" class="h-14 max-sm:h-10 mr-2" />
+          <h1 class="font-bold text-3xl">Catalogo Sites</h1>
         </div>
         <form class="max-sm:w-full">
-          <input class="max-sm:w-full max-sm:text-center w-96 p-3 rounded-3xl "
-            placeholder="Pesquisar aplicações por nome." type="text" />
+          <input class="max-sm:w-full max-sm:text-center w-[27rem] p-3 rounded-3xl "
+            placeholder="Pesquisar aplicações por nome" type="text" />
         </form>
       </div>
     </header>
@@ -36,24 +36,24 @@
       </section>
 
       <section class="max-sm:px-4 container mx-auto px-6">
-        <h2 class="mt-12 text-4xl font-bold">Adicionar Novo Item!</h2>
-        <div id="forms-container" class="w-full min-h-12 border-b-2 border-dashed">
+        <h2 class="mt-12 text-4xl font-bold">Adicionar favorito</h2>
+        <div id="formControls-container" class="w-full min-h-12 border-b-2 border-dashed">
           <div id="botoes-mais-menos" class="w-full flex justify-start items-center mt-5">
             <button id="botaoMais"
               class="mb-4 bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center text-4xl">+</button>
             <button id="botaoMenos"
               class="mb-4 bg-red-500 text-white rounded-full w-10 h-10 flex items-center justify-center text-4xl hidden">-</button>
           </div>
-          <div id="form-container" class="w-full rounded-lg mb-3 bg-gray-300">
+          <div id="form-container" class="w-full rounded-lg mb-12 mt-5 bg-gray-300 hidden">
             <div id="tabs" class="flex rounded-md bg-gray-200">
-              <div class="w-40">
+              <div class="w-48">
                 <div id="formTab"
-                  class="rounded-t-lg w-full p-2 px-3 text-center cursor-pointer hover:underline bg-gray-300">
+                  class="rounded-t-lg font-semibold w-full py-4 text-center cursor-pointer hover:underline bg-gray-300">
                   Formulário</div>
               </div>
-              <div class="w-40">
+              <div class="w-48">
                 <div id="linkPreviewTab"
-                  class="rounded-t-lg w-full p-2 px-3 text-center cursor-pointer hover:underline bg-gray-200">
+                  class="rounded-t-lg font-semibold w-full py-4 text-center cursor-pointer hover:underline bg-gray-200">
                   LinkPreview</div>
               </div>
             </div>
@@ -106,32 +106,11 @@
             </div>
           </div>
         </div>
-        <h2 class="mt-12 text-4xl font-bold">Websites Favoritos!</h2>
+      </section>
+
+      <section class="max-sm:px-4 container mx-auto px-6">
+        <h2 class="mt-12 text-4xl font-bold">Favoritos</h2>
         <div id="websites-container" class="flex flex-wrap pt-8 gap-x-24 max-md:jus">
-          
-          <!-- <div class="w-80 max-w-md bg-white rounded-lg shadow-lg p-4">
-            <img src="https://www.google.com/images/logo.png" class="w-full h-32 rounded-t-lg object-contain" alt="Imagem do site" />
-            <div class="p-4 h-[calc(100%-105px)]">
-              <h3 class="text-2xl font-semibold mb-2">Google 2</h3>
-              <div class="flex flex-col justify-between h-full">
-                <p class="text-gray-500 mb-5">Search webpages, images, videos and more.</p>
-                <a href="https://www.google.com" class="text-blue-500 hover:underline mt-2 block">Acessar</a>
-              </div>
-            </div>
-          </div>
-          <div class="w-80 max-w-md bg-white rounded-lg shadow-lg p-4 relative">
-            <img src="https://ada-site-frontend.s3.sa-east-1.amazonaws.com/home/Thumb-Ada.png"
-              class="w-full h-32 rounded-t-lg object-contain" alt="Imagem do site" />
-            <div class="p-4 h-[calc(100%-105px)]">
-              <h3 class="text-2xl font-semibold mb-2">Ada | A Nova Educação</h3>
-              <div>
-                <p class="text-gray-500 mb-5">Saber programar é mais importante que um diploma em seu currículo. Formações em
-                  tecnologia com foco em empregabilidade.</p>
-                <a href="https://ada.tech:443/" class="text-blue-500 hover:underline mt-2 block">Acessar</a>
-              </div>
-            </div>
-            <img src="./assets/trash_icon.png" alt="icone da lixeira" class="w-8 absolute right-5 bottom-7">
-          </div> -->
         </div>
       </section>
     </main>
