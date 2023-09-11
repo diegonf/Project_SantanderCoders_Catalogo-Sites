@@ -49,34 +49,34 @@ export class Website {
   static criarCard(card) {
     // div card
     const divCard = document.createElement('div');
-    divCard.className = 'w-80 max-w-md bg-white rounded-lg shadow-lg p-4 relative';
+    divCard.className = 'w-80 h-[31rem] max-w-md bg-white rounded-xl shadow-lg relative mb-20';
 
     // img
     const imagem = document.createElement('img');
     imagem.src = card.imagem;
-    imagem.className = 'w-full h-32 rounded-t-lg object-contain';
+    imagem.className = 'w-full h-40 rounded-t-lg object-contain';
     imagem.alt = `Imagem do site ${card.titulo}`;
     divCard.appendChild(imagem);
 
     // div do corpo do card
     const divCorpo = document.createElement('div');
-    divCorpo.className = 'p-4 h-[calc(100%-105px)]';
+    divCorpo.className = 'p-4 h-[calc(100%-100px)]';
     divCard.appendChild(divCorpo);
 
     // h3 titulo
     const titulo = document.createElement('h3');
-    titulo.className = 'text-2xl font-semibold mb-2';
+    titulo.className = 'text-2xl font-semibold mb-2 truncate';
     titulo.textContent = card.titulo;
     divCorpo.appendChild(titulo);
 
     // div texto e link do card
     const divTexto = document.createElement('div');
-    divTexto.className = 'flex flex-col justify-between h-full';
+    divTexto.className = 'flex flex-col justify-between h-[calc(100%-25px)]';
     divCorpo.appendChild(divTexto);
 
     // p descrição
     const descricao = document.createElement('p');
-    descricao.className = 'text-gray-500 mb-5';
+    descricao.className = 'text-gray-500 h-[12.5rem] overflow-hidden';
     descricao.textContent = card.descricao;
     divTexto.appendChild(descricao);
 
@@ -91,7 +91,7 @@ export class Website {
     if(!card.id) return divCard;
     const trash = document.createElement('img');
     trash.src = './assets/trash_icon.png';
-    trash.className = 'w-8 absolute right-5 bottom-7';
+    trash.className = 'w-8 absolute right-5 bottom-4 cursor-pointer';
     trash.alt = `icone da lixeira - deletar card`;
     trash.addEventListener('click', () => Catalogo.deletarItem(card.id));
     divCard.appendChild(trash);

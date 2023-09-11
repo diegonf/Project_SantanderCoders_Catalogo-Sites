@@ -56,11 +56,11 @@ export class Form {
     form.classList.remove('hidden');
     linkPreviewForm.classList.add('hidden');
 
-    formTab.classList.add('bg-gray-100', 'underline', 'underline-offset-4');
-    formTab.classList.remove('bg-gray-300');
+    formTab.classList.remove('bg-gray-200');
+    formTab.classList.add('bg-gray-300');
 
-    linkPreviewTab.classList.remove('bg-gray-100', 'underline', 'underline-offset-4');
-    linkPreviewTab.classList.add('bg-gray-300');
+    linkPreviewTab.classList.remove('bg-gray-300');
+    linkPreviewTab.classList.add('bg-gray-200');
   }
 
   static #mostrarTabLinkPreview(form, formTab, linkPreviewForm, linkPreviewTab) {
@@ -68,11 +68,11 @@ export class Form {
     form.classList.add('hidden');
     linkPreviewForm.classList.remove('hidden');
 
-    formTab.classList.remove('bg-gray-100', 'underline', 'underline-offset-4');
-    formTab.classList.add('bg-gray-300');
+    formTab.classList.remove('bg-gray-300');
+    formTab.classList.add('bg-gray-200');
 
-    linkPreviewTab.classList.add('bg-gray-100', 'underline', 'underline-offset-4');
-    linkPreviewTab.classList.remove('bg-gray-300');
+    linkPreviewTab.classList.remove('bg-gray-200');
+    linkPreviewTab.classList.add('bg-gray-300');
   }
 
   static #manipularAlteracaoForm() {
@@ -103,11 +103,11 @@ export class Form {
     const link = document.querySelector('#linkPreviewUrl').value;
     const previewDiv = document.querySelector('#form-preview');
     const previewBody = document.querySelector('#preview-body');
-    previewDiv.innerHTML = "";
     previewBody.classList.add('hidden');
-
+    
     const wsPreview = new WebsiteLinkPreview();
     await wsPreview.fetchData(link);
+    previewDiv.innerHTML = "";
     const card = Website.criarCard(wsPreview);
 
     previewBody.classList.remove('hidden');

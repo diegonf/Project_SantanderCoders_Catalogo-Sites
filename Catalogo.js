@@ -16,6 +16,12 @@ export class Catalogo {
   static cadastrarCatalogoInicial_excluir() {
     const lista = [
       {
+        titulo: "Tailwind CSS - Rapidly build modern websites without ever leaving your HTML.",
+        descricao: "Tailwind CSS is a utility-first CSS framework for rapidly building modern websites without ever leaving your HTML.",
+        imagem: "https://tailwindcss.com/_next/static/media/social-card-large.a6e71726.jpg",
+        url: "https://tailwindcss.com/"
+      },
+      {
         titulo: "Google",
         descricao: "Search webpages, images, videos and more.",
         imagem: "https://www.google.com/images/logo.png",
@@ -26,7 +32,43 @@ export class Catalogo {
         descricao: "Saber programar é mais importante que um diploma em seu currículo. Formações em tecnologia com foco em empregabilidade.",
         imagem: "https://ada-site-frontend.s3.sa-east-1.amazonaws.com/home/Thumb-Ada.png",
         url: "https://ada.tech:443/",
-      }
+      },
+      {
+        titulo: "Google",
+        descricao: "Search webpages, images, videos and more.",
+        imagem: "https://www.google.com/images/logo.png",
+        url: "https://www.google.com",
+      },
+      {
+        titulo: "Ada | A Nova Educação",
+        descricao: "Saber programar é mais importante que um diploma em seu currículo. Formações em tecnologia com foco em empregabilidade.",
+        imagem: "https://ada-site-frontend.s3.sa-east-1.amazonaws.com/home/Thumb-Ada.png",
+        url: "https://ada.tech:443/",
+      },
+      {
+        titulo: "Google",
+        descricao: "Search webpages, images, videos and more.",
+        imagem: "https://www.google.com/images/logo.png",
+        url: "https://www.google.com",
+      },
+      {
+        titulo: "Ada | A Nova Educação",
+        descricao: "Saber programar é mais importante que um diploma em seu currículo. Formações em tecnologia com foco em empregabilidade.",
+        imagem: "https://ada-site-frontend.s3.sa-east-1.amazonaws.com/home/Thumb-Ada.png",
+        url: "https://ada.tech:443/",
+      },
+      {
+        titulo: "Google",
+        descricao: "Search webpages, images, videos and more.",
+        imagem: "https://www.google.com/images/logo.png",
+        url: "https://www.google.com",
+      },
+      {
+        titulo: "Ada | A Nova Educação",
+        descricao: "Saber programar é mais importante que um diploma em seu currículo. Formações em tecnologia com foco em empregabilidade.",
+        imagem: "https://ada-site-frontend.s3.sa-east-1.amazonaws.com/home/Thumb-Ada.png",
+        url: "https://ada.tech:443/",
+      },
     ];
     localStorage.setItem('listaSites', JSON.stringify(lista));
   }
